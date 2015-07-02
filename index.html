@@ -7,7 +7,6 @@
 	var Swotter = angular.module('SwotterApp', []);
 	Swotter.controller('SWOTCtrl', ['$scope',
 		function($scope) {
-			console.log("starts");
 			$scope.strengths = [];
 			$scope.weaknesses = [];
 			$scope.opportunities = [];
@@ -21,29 +20,44 @@
 			]
 
 			$scope.addChara = function() {
-				console.log("addChara "+$scope.charaType.id);
 				switch($scope.charaType.id) {
 					case 0:
 						$scope.strengths.push($scope.chara);
-						console.log("added strength");
 						break;
 					case 1:
 						$scope.weaknesses.push($scope.chara);
-						console.log("added wk");
 						break;
 					case 2:
 						$scope.opportunities.push($scope.chara);
-						console.log("added opp");
 						break;
 					case 3:
 						$scope.threats.push($scope.chara);
-						console.log("added thr");
 						break;
 					default:
-						console.log("default");
 				}
 				$scope.chara = '';
-				$scope.charaType = 0;
+				$scope.charaType.id = 0;
+			};
+
+			$scope.removeChara = function(charaType, chara) {
+				var charaList;
+				switch(charaType) {
+					case 0:
+						charaList = $scope.strengths;
+						break;
+					case 1:
+						charaList = $scope.weaknesses;
+						break;
+					case 2:
+						charaList = $scope.opportunities;
+						break;
+					case 3:
+						charaList = $scope.threats;
+						break;
+					default:
+				}
+				var charaIndex = charaList.indexOf(chara);
+				charaList.splice(charaIndex,1);
 			};
 
 		}]);
@@ -94,6 +108,7 @@
 			<form ng-submit="addChara()">
 				<input type="text" ng-model="chara" placeholder="Characteristic">
 				<select ng-model="charaType.id"
+					ng-init="charaType.id=0"
 					ng-options="areas.indexOf(area) as area for area in areas">
 				</select>
 				<input type="submit" value="Add">
@@ -105,7 +120,7 @@
 					<td class="area" bgcolor="#DCFABC">
 						<div class="list">
 							<ul>
-								<li class="listItem" ng-repeat="strength in strengths">{{strength}}</li>
+								<li class="listItem" ng-repeat="strength in strengths">{{strength}} <a href="" ng-click="removeChara(0,strength)">🞩</a></li>
 							</ul>
 						</div>
 						<div class="areaTitle"><span ng-if="strengths.length>1">{{strengths.length}}</span> Strengths</div>
@@ -113,7 +128,7 @@
 					<td class="area" bgcolor="#FFCEC0">
 						<div class="list">
 							<ul>
-								<li class="listItem" ng-repeat="weakness in weaknesses">{{weakness}}</li>
+								<li class="listItem" ng-repeat="weakness in weaknesses">{{weakness}} <a href="" ng-click="removeChara(1,weakness)">🞩</a></li>
 							</ul>
 						</div>
 						<div class="areaTitle"><span ng-if="weaknesses.length>1">{{weaknesses.length}}</span> Weaknesses</div>
@@ -123,7 +138,7 @@
 					<td class="area" bgcolor="#B4EFCF">
 						<div class="list">
 							<ul>
-								<li class="listItem" ng-repeat="opportunity in opportunities">{{opportunity}}</li>
+								<li class="listItem" ng-repeat="opportunity in opportunities">{{opportunity}}  <a href="" ng-click="removeChara(2,opportunity)">🞩</a></li>
 							</ul>
 						</div>
 						<div class="areaTitle"><span ng-if="opportunities.length>1">{{opportunities.length}}</span> Opportunities</div>
@@ -131,7 +146,7 @@
 					<td class="area" bgcolor="#F8BBD1">
 						<div class="list">
 							<ul>
-								<li class="listItem" ng-repeat="threat in threats">{{threat}}</li>
+								<li class="listItem" ng-repeat="threat in threats">{{threat}} <a href="" ng-click="removeChara(3,threat)">🞩</a></li>
 							</ul>
 						</div>
 						<div class="areaTitle"><span ng-if="threats.length>1">{{threats.length}}</span> Threats</div>

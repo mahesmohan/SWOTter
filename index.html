@@ -67,6 +67,7 @@
 	}
 	.area {
 		position: relative;
+		vertical-align: top;
 	}
 	.areaTitle {
 		position: absolute;
@@ -74,6 +75,12 @@
 		vertical-align: top;
 		top: 5px;
 		right: 5px;
+	}
+	.list {
+		position: absolute;
+		padding:10px;
+		vertical-align: top;
+		text-align: left;
 	}
 	</style>
 </head>
@@ -101,25 +108,25 @@
 								<li class="listItem" ng-repeat="strength in strengths">{{strength}}</li>
 							</ul>
 						</div>
-						<div class="areaTitle"><span ng-if="strengths.length>0">[{{strengths.length}}]</span> Strengths</div>
+						<div class="areaTitle"><span ng-if="strengths.length>1">{{strengths.length}}</span> Strengths</div>
 					</td>
 					<td class="area" bgcolor="#FFCEC0">
-						<div>
+						<div class="list">
 							<ul>
 								<li class="listItem" ng-repeat="weakness in weaknesses">{{weakness}}</li>
 							</ul>
 						</div>
-						<div class="areaTitle"><span ng-if="weaknesses.length>0">[{{weaknesses.length}}]</span> Weaknesses</div>
+						<div class="areaTitle"><span ng-if="weaknesses.length>1">{{weaknesses.length}}</span> Weaknesses</div>
 					</td>
 				</tr>
 				<tr>
 					<td class="area" bgcolor="#B4EFCF">
-						<div>
+						<div class="list">
 							<ul>
 								<li class="listItem" ng-repeat="opportunity in opportunities">{{opportunity}}</li>
 							</ul>
 						</div>
-						<div class="areaTitle"><span ng-if="opportunities.length>0">[{{opportunities.length}}]</span> Opportunities</div>
+						<div class="areaTitle"><span ng-if="opportunities.length>1">{{opportunities.length}}</span> Opportunities</div>
 					</td>
 					<td class="area" bgcolor="#F8BBD1">
 						<div class="list">
@@ -127,7 +134,7 @@
 								<li class="listItem" ng-repeat="threat in threats">{{threat}}</li>
 							</ul>
 						</div>
-						<div class="areaTitle"><span ng-if="threats.length>0">[{{threats.length}}]</span> Threats</div>
+						<div class="areaTitle"><span ng-if="threats.length>1">{{threats.length}}</span> Threats</div>
 					</td>
 				</tr>
 			</table>

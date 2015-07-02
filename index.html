@@ -1,7 +1,53 @@
-<html>
+<html ng-app="SwotterApp">
 <head>
 	<meta charset="utf-8">
 	<title>SWOTter</title>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js"></script>
+	<script type="text/javascript">
+	var Swotter = angular.module('SwotterApp', []);
+	Swotter.controller('SWOTCtrl', ['$scope',
+		function($scope) {
+			console.log("starts");
+			$scope.strengths = [];
+			$scope.weaknesses = [];
+			$scope.opportunities = [];
+			$scope.threats = [];
+
+			$scope.areas = [
+				'Strength',
+				'Weakness',
+				'Opportunity',
+				'Threat'
+			]
+
+			$scope.addChara = function() {
+				console.log("addChara "+$scope.charaType.id);
+				switch($scope.charaType.id) {
+					case 0:
+						$scope.strengths.push($scope.chara);
+						console.log("added strength");
+						break;
+					case 1:
+						$scope.weaknesses.push($scope.chara);
+						console.log("added wk");
+						break;
+					case 2:
+						$scope.opportunities.push($scope.chara);
+						console.log("added opp");
+						break;
+					case 3:
+						$scope.threats.push($scope.chara);
+						console.log("added thr");
+						break;
+					default:
+						console.log("default");
+				}
+				$scope.chara = '';
+				$scope.charaType = 0;
+			};
+
+		}]);
+	</script>
 	<style>
 	* {
 		font-family: sans-serif;
@@ -31,20 +77,17 @@
 	}
 	</style>
 </head>
-<body>
+<body ng-controller="SWOTCtrl">
 	<table width="100%">
 		<tr><td>
 			<h1 align="center">SWOTter</h1>
 			<center><sub>A simple browser based SWOT Analysis tool.</sub></center>
 		</td></tr>
 		<tr><td><center>
-			<form>
-				<input name="chara" type="text" placeholder="Characteristic">
-				<select name="type">
-					<option value="0" selected>Strength</option>
-					<option value="1">Weakness</option>
-					<option value="2">Opportunity</option>
-					<option value="3">Threat</option>
+			<form ng-submit="addChara()">
+				<input type="text" ng-model="chara" placeholder="Characteristic">
+				<select ng-model="charaType.id"
+					ng-options="areas.indexOf(area) as area for area in areas">
 				</select>
 				<input type="submit" value="Add">
 			</form>
@@ -53,18 +96,38 @@
 			<table class="swotTable" width="100%" height="100%">
 				<tr>
 					<td class="area" bgcolor="#DCFABC">
-						<div class="areaTitle">Strengths</div>
+						<div class="list">
+							<ul>
+								<li class="listItem" ng-repeat="strength in strengths">{{strength}}</li>
+							</ul>
+						</div>
+						<div class="areaTitle"><span ng-if="strengths.length>0">[{{strengths.length}}]</span> Strengths</div>
 					</td>
 					<td class="area" bgcolor="#FFCEC0">
-						<div class="areaTitle">Weaknesses</div>
+						<div>
+							<ul>
+								<li class="listItem" ng-repeat="weakness in weaknesses">{{weakness}}</li>
+							</ul>
+						</div>
+						<div class="areaTitle"><span ng-if="weaknesses.length>0">[{{weaknesses.length}}]</span> Weaknesses</div>
 					</td>
 				</tr>
 				<tr>
 					<td class="area" bgcolor="#B4EFCF">
-						<div class="areaTitle">Opportunities</div>
+						<div>
+							<ul>
+								<li class="listItem" ng-repeat="opportunity in opportunities">{{opportunity}}</li>
+							</ul>
+						</div>
+						<div class="areaTitle"><span ng-if="opportunities.length>0">[{{opportunities.length}}]</span> Opportunities</div>
 					</td>
 					<td class="area" bgcolor="#F8BBD1">
-						<div class="areaTitle">Threats</div>
+						<div class="list">
+							<ul>
+								<li class="listItem" ng-repeat="threat in threats">{{threat}}</li>
+							</ul>
+						</div>
+						<div class="areaTitle"><span ng-if="threats.length>0">[{{threats.length}}]</span> Threats</div>
 					</td>
 				</tr>
 			</table>

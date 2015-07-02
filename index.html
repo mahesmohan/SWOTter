@@ -110,7 +110,7 @@
 		</td></tr>
 		<tr><td><center>
 			<form ng-submit="addChara()">
-				<input type="text" ng-model="chara" placeholder="Characteristic">
+				<input type="text" ng-model="chara" placeholder="Characteristic" autofocus>
 				<select ng-model="charaType.id"
 					ng-init="charaType.id=0"
 					ng-options="areas.indexOf(area) as area for area in areas">

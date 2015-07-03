@@ -8,7 +8,7 @@
 	Swotter.controller('SWOTCtrl', ['$scope',
 		function($scope) {
 
-			$scope.showMenu = false;
+			$scope.hideMenu = false;
 
 			$scope.strengths = [];
 			$scope.weaknesses = [];
@@ -219,12 +219,12 @@
 		</tr>
 	</table>
 
-	<div class="header" ng-mouseenter="showMenu=!showMenu" ng-mouseleave="showMenu=!showMenu">
-		<div class="brand">
+	<div class="header">
+		<div class="brand" ng-click="hideMenu=!hideMenu">
 			<h1 align="right"><a href="">SWOTter <i class="fa fa-ellipsis-v"></i></a></h1>
-			<sub ng-show="!showMenu">A SWOT Analysis tool.</sub>
+			<sub ng-show="hideMenu">A SWOT Analysis tool.</sub>
 		</div>
-		<div class="inputArea" ng-show="showMenu">
+		<div class="inputArea" ng-show="!hideMenu">
 			<form>
 				<input class="txtInput" type="text" ng-model="chara" placeholder="Characteristic"> <br/>
 				<button class="btnInput" ng-repeat="area in areas" ng-click="addChara(areas.indexOf(area))" ng-bind="(area | getBtnText)"></button>

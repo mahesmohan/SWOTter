@@ -7,6 +7,9 @@
 	var Swotter = angular.module('SwotterApp', []);
 	Swotter.controller('SWOTCtrl', ['$scope',
 		function($scope) {
+
+			$scope.showMenu = false;
+
 			$scope.strengths = [];
 			$scope.weaknesses = [];
 			$scope.opportunities = [];
@@ -69,23 +72,59 @@
 		});
 	</script>
 	<link href='http://fonts.googleapis.com/css?family=Unica+One|Neucha' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<style>
 	* {
 		font-family: 'Unica One', cursive;
 	}
-	h1{
-		margin-top: 20px;
-		font-size: 2.5em;
-		line-height: 0;
+	a:active, a:hover, a:visited {
+		text-decoration: none;
+		color: #000;
 	}
-	sub {
-		font-size: 1em;
+	h1{
+		margin: 0;
+	} 
+	form {
+		padding: 0;
+		margin: 0;
+	}
+	body {
+		margin: 0;
+		padding: 0;
+	}
+	.header {
+		display: block;
+		margin: 0;
+		padding: 0;
+		position: absolute;
+		vertical-align: top;
+		text-align: right;
+		top: 15px;
+		right: 20px;
+	}
+	.header td {
+		padding: 3px;
+		vertical-align: middle;
+		width: 50%;
+	}
+	.brand {
+		display: block;
+	}
+	.brand a {
+		text-decoration: none;
+		color: #192222;
 	}
 	.txtInput {
 		font-family: sans-serif;
 	}
+	.btnInput {
+		margin: 1px;
+		min-width: 43px;
+	}
 	table {
-		border: 0px;
+		margin: 0;
+		padding: 0;
+		border: 0;
 	}
 	.swotTable {
 		border-color: 2px solid #ffffff;
@@ -107,9 +146,9 @@
 		font-family: 'Unica One', cursive;
 		position: absolute;
 		text-align: right;
-		vertical-align: top;
+		vertical-align: bottom;
 		opacity: .5;
-		top: 15px;
+		bottom: 15px;
 		right: 20px;
 	}
 	.list {
@@ -136,58 +175,56 @@
 	</style>
 </head>
 <body ng-controller="SWOTCtrl">
-	<table width="100%">
-		<tr><td>
-			<h1 align="center">SWOTter</h1>
-			<center><sub>A simple browser based SWOT Analysis tool.</sub></center>
-		</td></tr>
-		<tr><td><center>
-			<form>
-				<input class="txtInput" type="text" ng-model="chara" placeholder="Characteristic" autofocus>
-				<button ng-repeat="area in areas" ng-click="addChara(areas.indexOf(area))" ng-bind="(area | getBtnText)"></button>
-			</form>
-		</center></td></tr>
+	<table class="swotTable" width="100%" height="100%">
 		<tr>
-			<table class="swotTable" width="100%" height="100%">
-				<tr>
-					<td class="area" bgcolor="#DCFABC">
-					<div class="areaTitle"><span ng-if="strengths.length>1">{{strengths.length}}</span> Strengths</div>
-						<div class="list">
-							<ul>
-								<li class="listItem" ng-repeat="strength in strengths">{{strength}} <a href="" ng-click="removeChara(0,strength)">🞩</a></li>
-							</ul>
-						</div>
-					</td>
-					<td class="area" bgcolor="#FFCEC0">
-						<div class="list">
-							<ul>
-								<li class="listItem" ng-repeat="weakness in weaknesses">{{weakness}} <a href="" ng-click="removeChara(1,weakness)">🞩</a></li>
-							</ul>
-						</div>
-						<div class="areaTitle"><span ng-if="weaknesses.length>1">{{weaknesses.length}}</span> Weaknesses</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="area" bgcolor="#B4EFCF">
-						<div class="list">
-							<ul>
-								<li class="listItem" ng-repeat="opportunity in opportunities">{{opportunity}}  <a href="" ng-click="removeChara(2,opportunity)">🞩</a></li>
-							</ul>
-						</div>
-						<div class="areaTitle"><span ng-if="opportunities.length>1">{{opportunities.length}}</span> Opportunities</div>
-					</td>
-					<td class="area" bgcolor="#F8BBD1">
-						<div class="list">
-							<ul>
-								<li class="listItem" ng-repeat="threat in threats">{{threat}} <a href="" ng-click="removeChara(3,threat)">🞩</a></li>
-							</ul>
-						</div>
-						<div class="areaTitle"><span ng-if="threats.length>1">{{threats.length}}</span> Threats</div>
-					</td>
-				</tr>
-			</table>
+			<td class="area" bgcolor="#DCFABC">
+			<div class="areaTitle"><span ng-if="strengths.length>1">{{strengths.length}}</span> Strengths</div>
+				<div class="list">
+					<ul>
+						<li class="listItem" ng-repeat="strength in strengths">{{strength}} <a href="" ng-click="removeChara(0,strength)">🞩</a></li>
+					</ul>
+				</div>
+			</td>
+			<td class="area" bgcolor="#FFCEC0">
+				<div class="list">
+					<ul>
+						<li class="listItem" ng-repeat="weakness in weaknesses">{{weakness}} <a href="" ng-click="removeChara(1,weakness)">🞩</a></li>
+					</ul>
+				</div>
+				<div class="areaTitle"><span ng-if="weaknesses.length>1">{{weaknesses.length}}</span> Weaknesses</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="area" bgcolor="#B4EFCF">
+				<div class="list">
+					<ul>
+						<li class="listItem" ng-repeat="opportunity in opportunities">{{opportunity}}  <a href="" ng-click="removeChara(2,opportunity)">🞩</a></li>
+					</ul>
+				</div>
+				<div class="areaTitle"><span ng-if="opportunities.length>1">{{opportunities.length}}</span> Opportunities</div>
+			</td>
+			<td class="area" bgcolor="#F8BBD1">
+				<div class="list">
+					<ul>
+						<li class="listItem" ng-repeat="threat in threats">{{threat}} <a href="" ng-click="removeChara(3,threat)">🞩</a></li>
+					</ul>
+				</div>
+				<div class="areaTitle"><span ng-if="threats.length>1">{{threats.length}}</span> Threats</div>
+			</td>
 		</tr>
 	</table>
+
+	<div class="header" ng-mouseenter="showMenu=!showMenu" ng-mouseleave="showMenu=!showMenu">
+		<div class="brand">
+			<h1 align="right"><a href="">SWOTter <i class="fa fa-ellipsis-v"></i></a></h1>
+		</div>
+		<div class="inputArea" ng-show="showMenu">
+			<form>
+				<input class="txtInput" type="text" ng-model="chara" placeholder="Characteristic"> <br/>
+				<button class="btnInput" ng-repeat="area in areas" ng-click="addChara(areas.indexOf(area))" ng-bind="(area | getBtnText)"></button>
+			</form>
+		</div>
+	</div>
 
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

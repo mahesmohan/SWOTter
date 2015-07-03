@@ -23,25 +23,45 @@
 				'Threat'
 			]
 
-			$scope.addChara = function(charaArea) {
+			$scope.addCharaByEnter = function() {
+				var chara = $scope.chara;
+				var charaType = chara.substring(0,4).toLowerCase();
+				var charaArea;
+				if(charaType=='str:') {
+					charaArea=0;
+				} else if(charaType=='wea:') {
+					charaArea=1;
+				} else if(charaType=='opp:') {
+					charaArea=2;
+				} else if(charaType=='thr:') {
+					charaArea=3;
+				}
+				var charaSplit = $scope.chara.split(':');
+				$scope.addChara(charaArea, charaSplit[1].trim());
+			};
+
+			$scope.addCharaByClick = function(charaArea) {
+				$scope.addChara(charaArea, $scope.chara);
+			};
+
+			$scope.addChara = function(charaArea, chara) {
 				switch(charaArea) {
 					case 0:
-						$scope.strengths.push($scope.chara);
+						$scope.strengths.push(chara);
 						break;
 					case 1:
-						$scope.weaknesses.push($scope.chara);
+						$scope.weaknesses.push(chara);
 						break;
 					case 2:
-						$scope.opportunities.push($scope.chara);
+						$scope.opportunities.push(chara);
 						break;
 					case 3:
-						$scope.threats.push($scope.chara);
+						$scope.threats.push(chara);
 						break;
 					default:
 				}
 				$scope.chara = '';
-				$scope.charaType.id = 0;
-			};
+			}
 
 			$scope.removeChara = function(charaType, chara) {
 				var charaList;
@@ -94,6 +114,7 @@
 		padding: 0;
 	}
 	.header {
+		z-index: 100;
 		display: block;
 		margin: 0;
 		padding: 0;
@@ -226,10 +247,10 @@
 			<sub ng-show="hideMenu">A SWOT Analysis tool.</sub>
 		</div>
 		<div class="inputArea" ng-show="!hideMenu">
-			<form>
+			<form ng-submit="addCharaByEnter()">
 				<input class="txtInput" type="text" ng-model="chara" placeholder="Characteristic"> <br/>
-				<button class="btnInput" ng-repeat="area in areas" ng-click="addChara(areas.indexOf(area))" ng-bind="(area | getBtnText)"></button>
 			</form>
+			<button class="btnInput" ng-repeat="area in areas" ng-click="addCharaByClick(areas.indexOf(area))" ng-bind="(area | getBtnText)"></button>
 		</div>
 	</div>
 

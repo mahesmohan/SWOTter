@@ -109,6 +109,7 @@
 	}
 	.brand {
 		display: block;
+		max-width: 200px;
 	}
 	.brand a {
 		text-decoration: none;
@@ -221,6 +222,7 @@
 	<div class="header" ng-mouseenter="showMenu=!showMenu" ng-mouseleave="showMenu=!showMenu">
 		<div class="brand">
 			<h1 align="right"><a href="">SWOTter <i class="fa fa-ellipsis-v"></i></a></h1>
+			<sub ng-show="!showMenu">A SWOT Analysis tool.</sub>
 		</div>
 		<div class="inputArea" ng-show="showMenu">
 			<form>

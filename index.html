@@ -154,6 +154,7 @@
 	}
 	.btnInput {
 		margin-left: 2px;
+		margin-bottom: 3px;
 		min-width: 43px;
 	}
 	.infoArea {
@@ -162,7 +163,6 @@
 		border: 1px solid black;
 		background: #FFFFC2;
 		padding: 0 10px 0 10px;
-		margin-top: 3px;
 		color: black;
 		font-family: sans-serif;
 		text-align: left;
@@ -279,7 +279,7 @@
 			<sub ng-click="showMore=!showMore">
 				<a href="" ng-show="!showMore">Help</a>
 			</sub>
-			<div class="infoArea" ng-show="showMore" ng-click="showMore=!showMore">
+			<div class="infoArea" ng-show="showMore" ng-mouseleave="showMore=!showMore">
 				
 				<p>Prepend any characteristic with <span class="input">s:</span> <span class="input">w:</span> <span class="input">o:</span> or <span class="input">t:</span> and press <span class="input">EnterKey</span> to add them as Strength, Weakness, Opportunity or Threat.</p>
 

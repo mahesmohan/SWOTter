@@ -25,15 +25,15 @@
 
 			$scope.addCharaByEnter = function() {
 				var chara = $scope.chara;
-				var charaType = chara.substring(0,4).toLowerCase();
+				var charaType = chara.substring(0,2).toLowerCase();
 				var charaArea;
-				if(charaType=='str:') {
+				if(charaType=='s:') {
 					charaArea=0;
-				} else if(charaType=='wea:') {
+				} else if(charaType=='w:') {
 					charaArea=1;
-				} else if(charaType=='opp:') {
+				} else if(charaType=='o:') {
 					charaArea=2;
-				} else if(charaType=='thr:') {
+				} else if(charaType=='t:') {
 					charaArea=3;
 				}
 				var charaSplit = $scope.chara.split(':');

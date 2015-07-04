@@ -167,9 +167,11 @@
 	}
 	.infoArea p {
 		font-size: .8em;
+		font-family: inherit;
 	}
-	.infoArea .input {
+	.infoArea .interaction {
 		color: green;
+		font-family: inherit;
 	}
 	table {
 		margin: 0;
@@ -197,7 +199,7 @@
 		position: absolute;
 		text-align: right;
 		vertical-align: bottom;
-		opacity: .5;
+		opacity: .8;
 		bottom: 15px;
 		right: 20px;
 	}
@@ -213,6 +215,7 @@
 		list-style-type: none;
 	}
 	.listItem {
+		padding-left: 5px;
 		font-family: 'Neucha', cursive;
 		font-size: 1.2em;
 	}
@@ -231,14 +234,14 @@
 			<div class="areaTitle"><span ng-if="strengths.length>1">{{strengths.length}}</span> Strengths</div>
 				<div class="list">
 					<ul>
-						<li class="listItem" ng-repeat="strength in strengths">{{strength}} <a href="" ng-click="removeChara(0,strength)">🞩</a></li>
+						<li class="listItem" ng-repeat="strength in strengths">{{strength}} <a href="" ng-click="removeChara(0,strength)"><i class="fa fa-times"></i></a></li>
 					</ul>
 				</div>
 			</td>
 			<td class="area" bgcolor="#FFCEC0">
 				<div class="list">
 					<ul>
-						<li class="listItem" ng-repeat="weakness in weaknesses">{{weakness}} <a href="" ng-click="removeChara(1,weakness)">🞩</a></li>
+						<li class="listItem" ng-repeat="weakness in weaknesses">{{weakness}} <a href="" ng-click="removeChara(1,weakness)"><i class="fa fa-times"></i></a></li>
 					</ul>
 				</div>
 				<div class="areaTitle"><span ng-if="weaknesses.length>1">{{weaknesses.length}}</span> Weaknesses</div>
@@ -248,7 +251,7 @@
 			<td class="area" bgcolor="#B4EFCF">
 				<div class="list">
 					<ul>
-						<li class="listItem" ng-repeat="opportunity in opportunities">{{opportunity}}  <a href="" ng-click="removeChara(2,opportunity)">🞩</a></li>
+						<li class="listItem" ng-repeat="opportunity in opportunities">{{opportunity}}  <a href="" ng-click="removeChara(2,opportunity)"><i class="fa fa-times"></i></a></li>
 					</ul>
 				</div>
 				<div class="areaTitle"><span ng-if="opportunities.length>1">{{opportunities.length}}</span> Opportunities</div>
@@ -256,7 +259,7 @@
 			<td class="area" bgcolor="#F8BBD1">
 				<div class="list">
 					<ul>
-						<li class="listItem" ng-repeat="threat in threats">{{threat}} <a href="" ng-click="removeChara(3,threat)">🞩</a></li>
+						<li class="listItem" ng-repeat="threat in threats">{{threat}} <a href="" ng-click="removeChara(3,threat)"><i class="fa fa-times"></i></a></li>
 					</ul>
 				</div>
 				<div class="areaTitle"><span ng-if="threats.length>1">{{threats.length}}</span> Threats</div>
@@ -279,7 +282,7 @@
 			</sub>
 			<div class="infoArea" ng-show="showMore" ng-mouseleave="showMore=!showMore">
 				
-				<p>Prepend any characteristic with <span class="input">s:</span> <span class="input">w:</span> <span class="input">o:</span> or <span class="input">t:</span> and press <span class="input">EnterKey</span> to add them as Strength, Weakness, Opportunity or Threat.</p>
+				<p>Prepend any characteristic with <span class="interaction">s:</span> <span class="interaction">w:</span> <span class="interaction">o:</span> or <span class="interaction">t:</span> and press <span class="interaction">EnterKey</span> to add them as Strength, Weakness, Opportunity or Threat.</p>
 
 				<p>Version {{swotterVersion}}</p>
 

@@ -228,6 +228,17 @@
 	</style>
 </head>
 <body ng-controller="SWOTCtrl">
+	
+	<!-- Google Tag Manager -->
+	<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-K7W2XX"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-K7W2XX');</script>
+	<!-- End Google Tag Manager -->
+
 	<table class="swotTable" width="100%" height="100%">
 		<tr>
 			<td class="area" bgcolor="#DCFABC">
@@ -273,10 +284,10 @@
 			<sub ng-show="hideMenu">A SWOT Analysis tool.</sub>
 		</div>
 		<div class="inputArea" ng-show="!hideMenu">
-			<form ng-submit="addCharaByEnter()">
+			<form ng-submit="addCharaByEnter()" id="inputForm">
 				<input class="txtInput" type="text" ng-model="chara" placeholder="Characteristic"> <br/>
 			</form>
-			<button class="btnInput" ng-repeat="area in areas" ng-click="addCharaByClick(areas.indexOf(area))" ng-bind="(area | getBtnText)"></button> <br/>
+			<button id="addCharaBtn" class="btnInput" ng-repeat="area in areas" ng-click="addCharaByClick(areas.indexOf(area))" ng-bind="(area | getBtnText)"></button> <br/>
 			<sub ng-click="showMore=!showMore">
 				<a href="" ng-show="!showMore">Help</a>
 			</sub>

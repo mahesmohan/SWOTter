@@ -5,8 +5,8 @@
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js"></script>
 	<script type="text/javascript">
 	var Swotter = angular.module('SwotterApp', []);
-	Swotter.controller('SWOTCtrl', ['$scope',
-		function($scope) {
+	Swotter.controller('SWOTCtrl', ['$scope', '$document',
+		function($scope, $document) {
 
 			$scope.swotterVersion = "0.4";
 
@@ -18,6 +18,10 @@
 			$scope.opportunities = [];
 			$scope.threats = [];
 
+			$scope.swotTitle = "SWOTter";
+			$scope.subTitle = "A SWOT Analysis tool.";
+			$scope.pageTitle = "SWOTter";
+
 			$scope.areas = [
 				'Strength',
 				'Weakness',
@@ -28,18 +32,23 @@
 			$scope.addCharaByEnter = function() {
 				var chara = $scope.chara;
 				var charaType = chara.substring(0,2).toLowerCase();
-				var charaArea;
-				if(charaType=='s:') {
-					charaArea=0;
-				} else if(charaType=='w:') {
-					charaArea=1;
-				} else if(charaType=='o:') {
-					charaArea=2;
-				} else if(charaType=='t:') {
-					charaArea=3;
+				if(charaType=='h:') {
+					$scope.setTitle(chara);
+					$scope.chara = '';
+				} else {
+					var charaArea;
+					if(charaType=='s:') {
+						charaArea=0;
+					} else if(charaType=='w:') {
+						charaArea=1;
+					} else if(charaType=='o:') {
+						charaArea=2;
+					} else if(charaType=='t:') {
+						charaArea=3;
+					}
+					var charaSplit = chara.substring(2,chara.length);
+					$scope.addChara(charaArea, charaSplit.trim());
 				}
-				var charaSplit = $scope.chara.split(':');
-				$scope.addChara(charaArea, charaSplit[1].trim());
 			};
 
 			$scope.addCharaByClick = function(charaArea) {
@@ -91,7 +100,23 @@
 				$scope.showMore = false;
 			};
 
+			$scope.setTitle = function(newTitle) {
+				newTitle = newTitle.substring(2,newTitle.length).trim();
+				if(newTitle.trim().length==0) {
+					console.log(newTitle.trim().length)
+					$scope.swotTitle = "SWOTter";
+					$scope.subTitle = "A SWOT Analysis tool.";
+					$scope.pageTitle = "SWOTter";
+				} else {
+					console.log(newTitle.trim().length)
+					$scope.swotTitle = newTitle;
+					$scope.pageTitle = $scope.swotTitle+" - SOWTter";
+					$scope.subTitle = "SWOTter, a SWOT Analysis tool.";
+				}
+				$document[0].title = $scope.pageTitle;
+			};
 		}]);
+	
 	Swotter.filter('getBtnText',
 		function(){
 			return function(areaName) {
@@ -270,8 +295,8 @@
 
 	<div class="header">
 		<div class="brand" ng-click="toggleInputArea()">
-			<h1 align="right"><a href="">SWOTter <i class="fa fa-ellipsis-v"></i></a></h1>
-			<sub ng-show="hideMenu">A SWOT Analysis tool.</sub>
+			<h1 align="right"><a href="">{{swotTitle}} <i class="fa fa-ellipsis-v"></i></a></h1>
+			<sub ng-show="hideMenu">{{subTitle}}</sub>
 		</div>
 		<div class="inputArea" ng-show="!hideMenu">
 			<form ng-submit="addCharaByEnter()" id="inputForm">
